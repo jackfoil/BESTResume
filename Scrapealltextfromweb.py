@@ -29,11 +29,17 @@ soup = BeautifulSoup(res.content, "html.parser")
 tag = soup.div
 lis = [] 
 
-# Print each string recursively
+
+# Puts each div text in a list and strips of unessary test
 for string in tag.strings:
-    lis.append(string)
-    
-quit()
+    lis.append(string.rstrip("\n"))
+
+
+# allows us to print out the binary into the pdf
+restext = list(filter(None, lis))
+text = [x.encode('utf-8') for x in restext]
+
+
 ################################################Creation of the pdf
 #creates the pdf 
 pdf = FPDF('P', 'mm', 'Letter')
@@ -44,9 +50,16 @@ pdf.add_page()
 #spefify the font and color
 pdf.set_font('times', '', 1)
 
+##creates the watermark for the paper
+watermark = "" 
+for i in text:
+    watermark += str(i) + " "
 
-#add text
-pdf.multi_cell(0, 1, lis)
-pdf.output('pdf_1.pdf')
+# repeats three times (for the ATS to notice it)
+for j in range(3):
+    pdf.multi_cell(0, .5, watermark)
+
+#outputs the pdf
+pdf.output('watermark.pdf')
 
 
