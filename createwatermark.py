@@ -47,12 +47,16 @@ def createwatermark(website, num):
 
     #spefify the font and color
     pdf.set_font('times', '', 1)
-    #pdf.set_text_color(255,255,255)
+    pdf.set_text_color(255,255,255)
 
     ##creates the watermark for the paper
     watermark = "" 
+    limit = 0
     for i in text:
         watermark += str(i) + " "
+        limit += 1
+        if(limit > 100):
+            break
 
     # repeats three times (for the ATS to notice it)
     for j in range(num):
