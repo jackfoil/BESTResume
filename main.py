@@ -6,7 +6,6 @@ from merg import *
 from tkinter import *
 from tkinter.ttk import *
 from tkinter.filedialog import askopenfile 
-import time
 
 
 
