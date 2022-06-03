@@ -16,7 +16,7 @@ from fpdf import FPDF
 #website = input("what website would you like to scrape? ")
 
 
-def createwatermark(website, num, numlimit):
+def createwatermark(website, num, numlimit, hide):
     # getting response object
     res = requests.get(website)
     
@@ -47,7 +47,11 @@ def createwatermark(website, num, numlimit):
 
     #spefify the font and color
     pdf.set_font('times', '', 1)
-    #pdf.set_text_color(255,255,255)
+
+    if(hide == True):
+        pdf.set_text_color(255,255,255)
+    else:
+        pass
 
     ##creates the watermark for the paper
     watermark = "" 
@@ -63,7 +67,7 @@ def createwatermark(website, num, numlimit):
         pdf.multi_cell(0, .75, watermark)
 
     #outputs the pdf
-    pdf.output('Testpdfs/watermark.pdf')
+    pdf.output('watermark.pdf')
 
 
 
